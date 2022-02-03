@@ -4,24 +4,61 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <h1>Generate A Random Password</h1>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+  </head>
+  <body>
+    <h1>Generate A Random Password</h1>
 
-        <input id="pass-display" type="text" placeholder="your password is...">
-
+    <div class="flex-container">
         <button id="btn-fun">Fun</button>
         <button id="btn-random">Random</button>
-        <button id="btn-strict">Strict</button>
-        
-        <script src="./assets/js//app.js" async defer></script>
-        
-    </body>
+        <input id="pass-display" type="text" placeholder="your password is..." />
+    </div>
+
+    <div class="flex-container">
+      <h2>Generate A Password Based Upon Your Criteria</h2>
+      <form id="strict-form" class="flex-col">
+        <div class="">
+          <label for="total-characters">Minimum Number of Characters</label>
+          <input
+            id="total-characters"
+            type="number"
+            value="8"
+            min="8"
+            max="128"
+          />
+        </div>
+
+        <div class="">
+          <label for="capital-letters">How Many Capital Letters?</label>
+          <input id="capital-letters" type="number" min="0" max="128" value="0"/>
+        </div>
+
+        <div class="">
+          <label for="special-characters"
+            >How Many Special Characters?</label
+          >
+          <input id="special-characters" type="number" min="0" max="128" value="0" />
+        </div>
+
+        <div class="">
+            <label for="number-characters"
+              >How Many Numbers?</label
+            >
+            <input id="number-characters" type="number" min="0" max="128" value="0" />
+          </div>
+
+        <button>Generate</button>
+      </form>
+      <input id="strict-output" type="text" placeholder="Your password is..."/>
+    </div>
+
+    <script src="./assets/js//app.js" async defer></script>
+  </body>
 </html>

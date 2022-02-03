@@ -2,6 +2,7 @@
 const btnFun = document.querySelector('#btn-fun')
 const btnRandom = document.querySelector('#btn-random')
 const displayPass = document.querySelector('#pass-display')
+const strictForm = document.querySelector('#strict-form');
 
 //Data seeds as arrays
 const verbs =  [
@@ -73,6 +74,8 @@ const nouns = [
     "Rock"
 ]
 
+const alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "z", "y", "z",]
+
 const symboles = ["!", "@", "#", "$", "%", "&"]
 
 const nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -94,12 +97,22 @@ const randomizeArrayOfArrays = (oldArray) => {
 }
 
 //Pass in array, picks random index in that array for array.length amount of times, and returns new array 
-const randomizeArray = (oldArray) => {
-    const newArray = [];
+const randomizeArray = (oldArray, times = 0, strict = false) => {
+    if(times === 0 && strict === false){
+        const newArray = [];
     for(let i = 0; i < oldArray.length; i++){
         newArray.push(oldArray[randomNum(oldArray.length)]);
     }
     return newArray;
+    }
+    else{
+        const newArray = [];
+    for(let i = 0; i < times; i++){
+        newArray.push(oldArray[randomNum(oldArray.length)]);
+    }
+    return newArray;
+    }
+
 }
 
 //Function that takes array arguents and concats them to generate password.
@@ -141,17 +154,63 @@ const createRandomPassword = (verb, numOfNums, symbole) => {
     return passwordString;
 }
 
+//Criteria Password generator
+const makeStrictPass = () => {
+    const passOutput = document.querySelector('#strict-output');
+    const totalChars = parseInt(document.querySelector('#total-characters').value);
+    const capLetters = parseInt(document.querySelector('#capital-letters').value);
+    const specialChars = parseInt(document.querySelector('#special-characters').value);
+    const numChars = parseInt(document.querySelector('#number-characters').value);
+    const totalLetters = totalChars - (numChars+specialChars);
+
+    if(totalChars < specialChars + numChars){
+        alert("The number of special characters and numbers need to be less than or equal to the total number of characters");
+        passOutput.value = ""
+    }
+    else if(capLetters > totalChars - (numChars+specialChars)){
+        alert("Your requested amount of cpital letters exceeds the total amount of letter characters");
+        passOutput.value = ""
+    }
+    else{
+        const letterArray = randomizeArray(alphabet, totalLetters, true)
+        const numsArray = randomizeArray(nums, numChars, true);
+        const specialArray = randomizeArray(symboles, specialChars, true);
+        
+        const concatArray = letterArray.concat(numsArray).concat(specialArray);
+
+        let newString = ""
+
+        for(let i = 0; i < concatArray.length; i++){
+            newString += concatArray[i]
+            count = 0;
+            if(newString.length === capLetters){
+                newString = newString.toUpperCase()
+            }
+        }
+
+        passOutput.value = newString;
+    }
+}
+
 
 //Event listeners
 
+//fun password generation
 btnFun.addEventListener('click', (e) => {
     const myPassword = createFunPassword(verbs, nouns, nums);
     displayPass.value = "";
     displayPass.value = myPassword;
 })
 
+//Weird password generation
 btnRandom.addEventListener('click', (e) => {
     const myPassword = createRandomPassword(verbs, 4, symboles);
     displayPass.value = "";
     displayPass.value = myPassword;
+})
+
+//Strict criteria generation
+strictForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    makeStrictPass();
 })
