@@ -83,3 +83,13 @@ button:hover{
 .flex-container input:last-child{
     width: 100%;
 }
+
+textarea{
+    width: 100%;
+    margin-bottom: 1rem;
+    border: solid var(--accent-drk) 1px;
+    border-radius: .25rem;
+    font-size: 1.5rem;
+    background-color: var(--accent-red);
+    font-weight: bolder;
+}

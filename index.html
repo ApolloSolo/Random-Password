@@ -24,12 +24,6 @@
     </header>
 
     <div class="flex-container">
-        <button id="btn-fun">Fun</button>
-        <button id="btn-random">Random</button>
-        <input id="pass-display" type="text" placeholder="your password is..." />
-    </div>
-
-    <div class="flex-container">
       <h2>Generate A Password Based Upon Your Criteria</h2>
       <form id="strict-form" class="flex-col">
         <div class="">
@@ -64,8 +58,15 @@
 
         <button>Generate</button>
       </form>
-      <input id="strict-output" type="text" placeholder="Your password is..."/>
+      <textarea id="strict-output"  rows="5" cols="20" placeholder="Your password is..."></textarea>
     </div>
+
+    <div class="flex-container">
+      <h2>A Bit More Fun</h2>
+      <button id="btn-fun">Fun</button>
+      <button id="btn-random">Random</button>
+      <input id="pass-display" type="text" placeholder="your password is..." />
+  </div>
 
     <script src="./assets/js//app.js" async defer></script>
   </body>
